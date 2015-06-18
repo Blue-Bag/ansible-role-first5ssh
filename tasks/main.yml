@@ -1,0 +1,10 @@
+---
+
+- name: msg="ssh_server_key_bits {{ ssh_server_key_bits }}"
+  debug: var={{ ssh_server_key_bits }}
+
+- name: SSH Config | add ssh config file
+  template: src=ssh_config.j2 dest=/etc/ssh/sshd_config backup=yes
+  sudo: true
+  notify: First5 SSH | restart ssh
+
