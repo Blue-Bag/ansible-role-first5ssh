@@ -14,5 +14,5 @@ ssh_max_startups: "10:30:100"
 # control forwarding
 ssh_allow_tcp_forwarding: "no"
 ssh_allow_x11_forwarding: "no"
-  
+
 ssh_allowgroups: "anAdmin"
