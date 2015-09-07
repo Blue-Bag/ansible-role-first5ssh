@@ -1,0 +1,11 @@
+---
+
+ssh_config_path: /etc/ssh/sshd_config
+ssh_daemon: sshd
+ssh_service: sshd
+
+sshd_sftp_path: '/usr/libexec/openssh/sftp-server'
+
+sshd_protocol2_keys:
+  - '/etc/ssh/ssh_host_rsa_key'
+  - '/etc/ssh/ssh_host_dsa_key'
