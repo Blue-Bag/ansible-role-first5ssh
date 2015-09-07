@@ -8,9 +8,10 @@ Port {{ ssh_port }}
 #ListenAddress 0.0.0.0
 Protocol 2
 # HostKeys for protocol version 2
-HostKey /etc/ssh/ssh_host_rsa_key
-HostKey /etc/ssh/ssh_host_dsa_key
-HostKey /etc/ssh/ssh_host_ecdsa_key
+  {% for key_path in sshd_protocol2_keys %}
+HostKey {{ key_path }}
+  {% endfor %}
+
 #Privilege Separation is turned on for security
 UsePrivilegeSeparation yes
 
@@ -19,7 +20,7 @@ KeyRegenerationInterval 3600
 ServerKeyBits {{ ssh_server_key_bits }}
 
 # Logging
-SyslogFacility AUTH
+SyslogFacility {{ ssh_syslog_target }}
 LogLevel INFO
 
 # Authentication:
@@ -48,7 +49,7 @@ PermitEmptyPasswords no
 ChallengeResponseAuthentication no
 
 # Change to no to disable tunnelled clear text passwords
-PasswordAuthentication no
+PasswordAuthentication {{ ssh_password_authentication }}
 
 # Kerberos options
 #KerberosAuthentication no
@@ -57,7 +58,7 @@ PasswordAuthentication no
 #KerberosTicketCleanup yes
 
 # GSSAPI options
-GSSAPIAuthentication no
+GSSAPIAuthentication {{ ssh_gsapi_authentication | default('no')}}
 #GSSAPICleanupCredentials yes
 
 # Do you need port forwarding?
@@ -65,7 +66,7 @@ AllowTcpForwarding {{ ssh_allow_tcp_forwarding }}
 X11Forwarding {{ ssh_allow_x11_forwarding }}
 
 X11DisplayOffset 10
-PrintMotd no
+PrintMotd {{ ssh_printmotd }}
 PrintLastLog yes
 TCPKeepAlive yes
 #UseLogin no
@@ -74,9 +75,11 @@ MaxStartups {{ ssh_max_startups }}
 #Banner /etc/issue.net
 
 # Allow client to pass locale environment variables
+{% if ssh_accept_locale %}
 AcceptEnv LANG LC_*
+{% endif %}
 
-Subsystem sftp /usr/lib/openssh/sftp-server
+Subsystem sftp {{ sshd_sftp_path }}
 
 # Set this to 'yes' to enable PAM authentication, account processing,
 # and session processing. If this is enabled, PAM authentication will

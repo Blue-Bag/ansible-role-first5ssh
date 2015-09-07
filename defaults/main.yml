@@ -16,3 +16,16 @@ ssh_allow_tcp_forwarding: "no"
 ssh_allow_x11_forwarding: "no"
 
 ssh_allowgroups: "anAdmin"
+
+# see https://github.com/geerlingguy/drupal-vm/issues/186
+ssh_accept_locale: false
+
+ssh_printmotd: "yes"
+
+# speed up ssh by disabling GSAPI authentication
+ssh_gsapi_authentication: "no"
+
+ssh_password_authentication: "no"
+
+# Target for ssh logging AUTH | AUTHPRIV
+ssh_syslog_target: 'AUTH'
