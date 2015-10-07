@@ -14,4 +14,4 @@
     validate: "/usr/sbin/{{ ssh_daemon }} -T -f %s"
   sudo: true
   notify: First5 SSH | restart ssh
-
+  when: first5ssh_manageconfig

@@ -29,3 +29,5 @@ ssh_password_authentication: "no"
 
 # Target for ssh logging AUTH | AUTHPRIV
 ssh_syslog_target: 'AUTH'
+
+first5ssh_manageconfig: True
