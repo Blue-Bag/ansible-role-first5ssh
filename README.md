@@ -3,6 +3,7 @@ Role: SSH
 
 Configure SSH as part of the First5 provisioning set of roles
 
+
 Requirements
 ------------
 Requires SSH
@@ -12,20 +13,20 @@ Role Variables
 
     # SSH Settings
     # optionally change port
-    ssh_port: "22"
+    `ssh_port`: "22"
     # reduce login grace time from 120 (2 minutes)
-    ssh_login_grace_time: "20"
+    `ssh_login_grace_time`: "20"
     # increase the server key bit encryption default=768
-    ssh_server_key_bits: "4096"
+    `ssh_server_key_bits`: "4096"
     # control the parallelism
-    ssh_max_startups: "10:30:100"
+    `ssh_max_startups`: "10:30:100"
     #"3:50:10"
 
     # control forwarding
-    ssh_allow_tcp_forwarding: "no"
-    ssh_allow_x11_forwarding: "no"
+    `ssh_allow_tcp_forwarding`: "no"
+    `ssh_allow_x11_forwarding`: "no"
 
-    ssh_allowgroups: "anAdmin"
+    `ssh_allowgroups`: "anAdmin"
 
 
 License
