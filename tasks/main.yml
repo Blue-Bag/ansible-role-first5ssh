@@ -3,8 +3,10 @@
 - name: Include OS-specific variables.
   include_vars: "{{ ansible_os_family }}.yml"
 
-- name: msg="ssh_server_key_bits {{ ssh_server_key_bits }}"
-  debug: var={{ ssh_server_key_bits }}
+- name: Debug ssh_server_key_bits
+  debug: 
+    var: "{{ ssh_server_key_bits }}"
+    verbosity: 4
 
 - name: SSH Config | add ssh config file
   template:
