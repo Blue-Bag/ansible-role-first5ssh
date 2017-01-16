@@ -1,6 +1,8 @@
 Role: SSH
 ========
 
+[![Build Status](https://travis-ci.org/Blue-Bag/ansible-role-first5ssh.svg?branch=master)](https://travis-ci.org/Blue-Bag/ansible-role-first5ssh)
+
 Configure SSH as part of the First5 provisioning set of roles
 
 
