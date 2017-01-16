@@ -1,4 +1,6 @@
 ---
 
 - name: First5 SSH | restart ssh
-  service: name={{ ssh_service }} state=restarted
+  service:
+    name: "{{ ssh_service }}"
+    state: restarted
