@@ -13,7 +13,7 @@ HostKey {{ key_path }}
   {% endfor %}
 
 #Privilege Separation is turned on for security
-UsePrivilegeSeparation yes
+UsePrivilegeSeparation {{ ssh_use_privilege_separation}}
 
 # Lifetime and size of ephemeral version 1 server key
 KeyRegenerationInterval 3600
@@ -21,11 +21,11 @@ ServerKeyBits {{ ssh_server_key_bits }}
 
 # Logging
 SyslogFacility {{ ssh_syslog_target }}
-LogLevel INFO
+LogLevel {{ ssh_loglevel }}
 
 # Authentication:
 LoginGraceTime {{ ssh_login_grace_time }}
-PermitRootLogin without-password
+PermitRootLogin {{  ssh_permit_root_login | default('no') }}
 StrictModes yes
 
 RSAAuthentication yes
@@ -68,8 +68,15 @@ X11Forwarding {{ ssh_allow_x11_forwarding }}
 X11DisplayOffset 10
 PrintMotd {{ ssh_printmotd }}
 PrintLastLog yes
-TCPKeepAlive yes
+TCPKeepAlive {{ ssh_tcp_keepalive }}
 #UseLogin no
+
+UseDNS {{ ssh_use_dns }}
+
+ClientAliveInterval {{ ssh_client_alive_interval }}
+ClientAliveCountMax {{ ssh_client_alive_countMax }}
+MaxAuthTries {{ ssh_max_auth_retries }}
+MaxSessions {{ ssh_max_sessions }}
 
 MaxStartups {{ ssh_max_startups }}
 #Banner /etc/issue.net

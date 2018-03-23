@@ -11,6 +11,20 @@ ssh_server_key_bits: "4096"
 ssh_max_startups: "10:30:100"
 #"3:50:10"
 
+ssh_client_alive_interval: 60
+ssh_client_alive_countMax: 2
+ssh_max_auth_retries: 6
+ssh_max_sessions: 2
+
+ssh_tcp_keepalive: 'yes'
+
+ssh_use_dns: 'yes'
+
+ssh_use_privilege_separation: 'sandbox'
+
+#without-password
+ssh_permit_root_login: 'no'
+
 # control forwarding
 ssh_allow_tcp_forwarding: "no"
 ssh_allow_x11_forwarding: "no"
@@ -26,6 +40,12 @@ ssh_printmotd: "yes"
 ssh_gsapi_authentication: "no"
 
 ssh_password_authentication: "no"
+
+# * Consider hardening SSH configuration [SSH-7408]
+#   - Details  : LogLevel (INFO --> VERBOSE)
+#     https://cisofy.com/controls/SSH-7408/
+ssh_loglevel: VERBOSE
+
 
 # Target for ssh logging AUTH | AUTHPRIV
 ssh_syslog_target: 'AUTH'
