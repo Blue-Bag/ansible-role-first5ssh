@@ -30,7 +30,44 @@ Role Variables
 
     `ssh_allowgroups`: "anAdmin"
 
+Hardening
+----------
+  * Consider hardening SSH configuration [SSH-7408]
+    - Details  : ClientAliveCountMax (3 --> 2)
+      https://cisofy.com/controls/SSH-7408/
+      http://go2linux.garron.me/linux/2011/02/limit-idle-ssh-sessions-time-avoid-unattended-ones-clientaliveinterval-clientalivecoun/
 
+  * Consider hardening SSH configuration [SSH-7408]
+    - Details  : LogLevel (INFO --> VERBOSE)
+      https://cisofy.com/controls/SSH-7408/
+
+  * Consider hardening SSH configuration [SSH-7408]
+    - Details  : MaxAuthTries (6 --> 2)
+      https://cisofy.com/controls/SSH-7408/
+
+  * Consider hardening SSH configuration [SSH-7408]
+    - Details  : MaxSessions (10 --> 2)
+      https://cisofy.com/controls/SSH-7408/
+
+  * Consider hardening SSH configuration [SSH-7408]
+    - Details  : PermitRootLogin (WITHOUT-PASSWORD --> NO)
+      https://cisofy.com/controls/SSH-7408/
+
+  * Consider hardening SSH configuration [SSH-7408]
+    - Details  : Port (22 --> )
+      https://cisofy.com/controls/SSH-7408/
+
+  * Consider hardening SSH configuration [SSH-7408]
+    - Details  : TCPKeepAlive (YES --> NO)
+      https://cisofy.com/controls/SSH-7408/
+
+  * Consider hardening SSH configuration [SSH-7408]
+    - Details  : UseDNS (YES --> NO)
+      https://cisofy.com/controls/SSH-7408/
+
+  * Consider hardening SSH configuration [SSH-7408]
+    - Details  : UsePrivilegeSeparation (YES --> SANDBOX)
+      https://cisofy.com/controls/SSH-7408/
 License
 -------
 
