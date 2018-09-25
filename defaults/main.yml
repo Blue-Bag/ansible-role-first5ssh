@@ -51,3 +51,6 @@ ssh_loglevel: VERBOSE
 ssh_syslog_target: 'AUTH'
 
 first5ssh_manageconfig: True
+
+ssh_hashknownhosts: 'yes'
+ssh_gsapi_delegatecreds: 'no'

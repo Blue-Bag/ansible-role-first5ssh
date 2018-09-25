@@ -1,6 +1,6 @@
 ---
 
-ssh_config_path: /etc/ssh/sshd_config
+ssh_config_path: /etc/ssh
 ssh_daemon: sshd
 ssh_service: sshd
 
