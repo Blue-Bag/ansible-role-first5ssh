@@ -5,12 +5,8 @@
 
    - name: Install openssl
      apt:
-       name: "{{ item }}"
+       name: ['openssh-server','openssh-client']
        update_cache: yes
        cache_valid_time: 86400
-     with_items:
-       - openssh-server
-       - openssh-client
-
   roles:
     - role_under_test
