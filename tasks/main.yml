@@ -33,7 +33,7 @@
     validate: "/usr/sbin/{{ ssh_daemon }} -T -f %s"
   become: true
   notify: First5 SSH | restart ssh
-  when: "{{first5ssh_manageconfig | bool}}"
+  when: first5ssh_manageconfig | bool
 
 - name: SSH Config | add ssh (client) config file
   template:
@@ -42,4 +42,4 @@
     backup: yes
   become: true
   notify: First5 SSH | restart ssh
-  when: "{{first5ssh_manageconfig | bool}}"
+  when: first5ssh_manageconfig | bool
