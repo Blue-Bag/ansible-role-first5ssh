@@ -54,3 +54,8 @@ first5ssh_manageconfig: True
 
 ssh_hashknownhosts: 'yes'
 ssh_gsapi_delegatecreds: 'no'
+
+# debate as to whether compression i necessary and
+# potential security risk (if compression system gets compromised)
+# #Compression delayed|no|yes
+ssh_compression: 'delayed'

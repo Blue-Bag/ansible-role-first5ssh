@@ -82,6 +82,8 @@ MaxSessions {{ ssh_max_sessions }}
 MaxStartups {{ ssh_max_startups }}
 #Banner /etc/issue.net
 
+Compression {{ ssh_compression }}
+
 # Allow client to pass locale environment variables
 {% if ssh_accept_locale %}
 AcceptEnv LANG LC_*
