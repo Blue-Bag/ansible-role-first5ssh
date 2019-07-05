@@ -13,12 +13,15 @@ ssh_max_startups: "10:30:100"
 
 ssh_client_alive_interval: 60
 ssh_client_alive_countMax: 2
-ssh_max_auth_retries: 6
+ssh_max_auth_retries: 3
 ssh_max_sessions: 2
 
 ssh_tcp_keepalive: 'yes'
 
-ssh_use_dns: 'yes'
+## Issue regarding security with this set to 'yes'
+# https://unix.stackexchange.com/questions/56941/what-is-the-point-of-sshd-usedns-option
+# https://security.googleblog.com/2016/02/cve-2015-7547-glibc-getaddrinfo-stack.html
+ssh_use_dns: 'no'
 
 ssh_use_privilege_separation: 'sandbox'
 
