@@ -21,7 +21,12 @@ ssh_tcp_keepalive: 'yes'
 ## Issue regarding security with this set to 'yes'
 # https://unix.stackexchange.com/questions/56941/what-is-the-point-of-sshd-usedns-option
 # https://security.googleblog.com/2016/02/cve-2015-7547-glibc-getaddrinfo-stack.html
+# https://bugs.launchpad.net/ubuntu/+source/openssh/+bug/424371
 ssh_use_dns: 'no'
+## Caution: If using "AllowUsers username@hostname" then "UseDNS yes"
+## must be used otherwise clients are rejected from logging in because hostname will not be resolved.
+## https://github.com/coreos/bugs/issues/92#issuecomment-122736006
+
 
 ssh_use_privilege_separation: 'sandbox'
 
