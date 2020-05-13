@@ -27,7 +27,7 @@ ssh_use_dns: 'no'
 ## must be used otherwise clients are rejected from logging in because hostname will not be resolved.
 ## https://github.com/coreos/bugs/issues/92#issuecomment-122736006
 
-
+# this is now deprecated
 ssh_use_privilege_separation: 'sandbox'
 
 #without-password
@@ -67,3 +67,9 @@ ssh_gsapi_delegatecreds: 'no'
 # potential security risk (if compression system gets compromised)
 # #Compression delayed|no|yes
 ssh_compression: 'delayed'
+
+# If the host we are configuring is a bastion
+# We can allow TCP forwarding so we can use it for tunneling
+ssh_bastion: false
+ssh_allowfwdgroups: "{{ ssh_allowgroups }}"
+ssh_allowtunneling_destinations: []
