@@ -105,7 +105,7 @@ AllowGroups {{ ssh_allowgroups }}
 
 {% if ssh_bastion %}
 # Allow tunneling for ssh if a bastion
-Match group {{ ssh_allowgroups }}
+Match group {{ ssh_allowfwdgroups }}
   AllowTcpForwarding  yes
     PermitOpen {{ ssh_allowtunneling_destinations | join(':22 ') }}
 {% endif %}
