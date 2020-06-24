@@ -9,7 +9,7 @@ ssh_login_grace_time: "20"
 ssh_server_key_bits: "4096"
 # control the parallelism
 ssh_max_startups: "10:30:100"
-#"3:50:10"
+# "3:50:10"
 
 ssh_client_alive_interval: 60
 ssh_client_alive_countMax: 2
@@ -27,10 +27,10 @@ ssh_use_dns: 'no'
 ## must be used otherwise clients are rejected from logging in because hostname will not be resolved.
 ## https://github.com/coreos/bugs/issues/92#issuecomment-122736006
 
-
+# this is now deprecated
 ssh_use_privilege_separation: 'sandbox'
 
-#without-password
+# without-password
 ssh_permit_root_login: 'no'
 
 # control forwarding
@@ -58,12 +58,18 @@ ssh_loglevel: VERBOSE
 # Target for ssh logging AUTH | AUTHPRIV
 ssh_syslog_target: 'AUTH'
 
-first5ssh_manageconfig: True
+first5ssh_manageconfig: true
 
 ssh_hashknownhosts: 'yes'
 ssh_gsapi_delegatecreds: 'no'
 
 # debate as to whether compression i necessary and
 # potential security risk (if compression system gets compromised)
-# #Compression delayed|no|yes
+# Compression delayed|no|yes
 ssh_compression: 'delayed'
+
+# If the host we are configuring is a bastion
+# We can allow TCP forwarding so we can use it for tunneling
+ssh_bastion: false
+ssh_allowfwdgroups: "{{ ssh_allowgroups }}"
+ssh_allowtunneling_destinations: []

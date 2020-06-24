@@ -12,7 +12,7 @@ Protocol 2
 HostKey {{ key_path }}
   {% endfor %}
 
-#Privilege Separation is turned on for security
+#Privilege Separation is turned on for security (deprecated)
 UsePrivilegeSeparation {{ ssh_use_privilege_separation}}
 
 # Lifetime and size of ephemeral version 1 server key
@@ -102,3 +102,10 @@ Subsystem sftp {{ sshd_sftp_path }}
 # and ChallengeResponseAuthentication to 'no'.
 UsePAM yes
 AllowGroups {{ ssh_allowgroups }}
+
+{% if ssh_bastion %}
+# Allow tunneling for ssh if a bastion
+Match group {{ ssh_allowfwdgroups }}
+  AllowTcpForwarding  yes
+    PermitOpen {{ ssh_allowtunneling_destinations | join(':22 ') }}
+{% endif %}
