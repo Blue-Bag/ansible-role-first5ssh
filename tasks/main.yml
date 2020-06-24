@@ -22,7 +22,7 @@
     recurse: yes
     mode: 0755
   become: true
-  when: runsshd_exist.stat.exists == false
+  when: not runsshd_exist.stat.exists | bool
 
 
 - name: SSH Config | add sshd (daemon) config file

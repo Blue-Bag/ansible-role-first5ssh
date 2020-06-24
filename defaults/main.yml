@@ -58,7 +58,7 @@ ssh_loglevel: VERBOSE
 # Target for ssh logging AUTH | AUTHPRIV
 ssh_syslog_target: 'AUTH'
 
-first5ssh_manageconfig: True
+first5ssh_manageconfig: true
 
 ssh_hashknownhosts: 'yes'
 ssh_gsapi_delegatecreds: 'no'
