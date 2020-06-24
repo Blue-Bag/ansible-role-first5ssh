@@ -1,7 +1,7 @@
 Role: SSH
 ========
 
-[![Build Status](https://travis-ci.org/Blue-Bag/ansible-role-first5ssh.svg?branch=master)](https://travis-ci.org/Blue-Bag/ansible-role-first5ssh)
+[![Build Status](https://travis-ci.org/Blue-Bag/ansible-role-first5ssh.svg?branch=main)](https://travis-ci.org/Blue-Bag/ansible-role-first5ssh)
 
 Configure SSH as part of the First5 provisioning set of roles
 
@@ -89,4 +89,3 @@ some useful config vars: http://www.thelinuxguy.nl/ssh-ftp-server/how-to-secure-
 
 http://serverfault.com/questions/275669/ssh-sshd-how-do-i-set-max-login-attempts
 has some useful IPTables rules
-
