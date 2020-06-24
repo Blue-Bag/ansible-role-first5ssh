@@ -4,9 +4,6 @@
   remote_user: root
   become: true
 
-  vars:
-    # Added to prevent test failures in CI.
-
   pre_tasks:
     - name: Update apt cache.
       apt: update_cache=true cache_valid_time=1200
@@ -14,8 +11,8 @@
       changed_when: false
     - name: Install openssl
       apt:
-        name: ['openssh-server','openssh-client']
-        update_cache: yes
+        name: ['openssh-server', 'openssh-client']
+        update_cache: true
         cache_valid_time: 86400
 
   roles:

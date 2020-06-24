@@ -9,7 +9,7 @@ ssh_login_grace_time: "20"
 ssh_server_key_bits: "4096"
 # control the parallelism
 ssh_max_startups: "10:30:100"
-#"3:50:10"
+# "3:50:10"
 
 ssh_client_alive_interval: 60
 ssh_client_alive_countMax: 2
@@ -30,7 +30,7 @@ ssh_use_dns: 'no'
 # this is now deprecated
 ssh_use_privilege_separation: 'sandbox'
 
-#without-password
+# without-password
 ssh_permit_root_login: 'no'
 
 # control forwarding
@@ -65,7 +65,7 @@ ssh_gsapi_delegatecreds: 'no'
 
 # debate as to whether compression i necessary and
 # potential security risk (if compression system gets compromised)
-# #Compression delayed|no|yes
+# Compression delayed|no|yes
 ssh_compression: 'delayed'
 
 # If the host we are configuring is a bastion

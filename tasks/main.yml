@@ -19,7 +19,7 @@
   file:
     path: '/var/run/sshd'
     state: directory
-    recurse: yes
+    recurse: true
     mode: 0755
   become: true
   when: not runsshd_exist.stat.exists | bool
@@ -29,7 +29,7 @@
   template:
     src: sshd_config.j2
     dest: "{{ ssh_config_path }}/sshd_config"
-    backup: yes
+    backup: true
     validate: "/usr/sbin/{{ ssh_daemon }} -T -f %s"
   become: true
   notify: First5 SSH | restart ssh
@@ -39,7 +39,7 @@
   template:
     src: ssh_config.j2
     dest: "{{ ssh_config_path }}/ssh_config"
-    backup: yes
+    backup: true
   become: true
   notify: First5 SSH | restart ssh
   when: first5ssh_manageconfig | bool
