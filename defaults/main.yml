@@ -60,6 +60,14 @@ ssh_syslog_target: 'AUTH'
 
 first5ssh_manageconfig: true
 
+first5ssh_hardenssh: true
+
+# only regen keys every n days
+sshkey_regen_days: 10
+
+
+ssh_show_debianbanner: 'no'
+
 ssh_hashknownhosts: 'yes'
 ssh_gsapi_delegatecreds: 'no'
 

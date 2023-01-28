@@ -3,6 +3,14 @@
 - name: Include OS-specific variables.
   include_vars: "{{ ansible_os_family }}.yml"
 
+- name: Include distribution and version-specific vars.
+  include_vars: "{{ item }}"
+  with_first_found:
+    - files:
+        - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+      skip: true
+
+
 - name: Debug ssh_server_key_bits
   debug:
     var: "{{ ssh_server_key_bits }}"
@@ -24,6 +32,60 @@
   become: true
   when: not runsshd_exist.stat.exists | bool
 
+
+- block:
+    - name: Make sure config.d dir exists
+      file:
+        path: "{{ ssh_config_path }}/sshd_config.d"
+        state: directory
+        owner: "root"
+        group: "root"
+        mode: 0755
+
+    - name: Check if we have updated ssh_host_rsa_key recently
+      stat:
+        path: "/etc/ssh/ssh_host_rsa_key"
+      register: stat_rsa_results
+
+    - name: Check if we have updated ssh_host_ed25519_key recently
+      stat:
+        path: "/etc/ssh/ssh_host_ed25519_key"
+      register: stat_ed25519_results          
+
+    - name: Regenerate host RSA keys
+      community.crypto.openssh_keypair:
+        path: /etc/ssh/ssh_host_rsa_key
+        size: 4096
+        type: rsa
+        force: True
+      when: ((ansible_date_time.epoch|int - stat_rsa_results.stat.mtime) > (sshkey_regen_days * 60 * 60 * 24))
+  
+
+    - name: Regenerate host ed25519 keys
+      community.crypto.openssh_keypair:
+        path: /etc/ssh/ssh_host_ed25519_key
+        size: 4096
+        type: ed25519
+        force: True
+      when: ((ansible_date_time.epoch|int - stat_ed25519_results.stat.mtime) > (sshkey_regen_days * 60 * 60 * 24))
+
+
+    - name: Disable SSH short moduli for DH
+      shell: set -o pipefail |
+        cp /etc/ssh/moduli /etc/ssh/moduli.bak &&
+        awk '$5 >= 3071' /etc/ssh/moduli > /etc/ssh/moduli.safe &&
+        mv /etc/ssh/moduli.safe /etc/ssh/moduli   
+      
+    - name: Put up hardening file
+      template:
+        src: ssh-audit_hardening.conf.j2
+        dest: "{{ ssh_config_path }}/sshd_config.d/ssh-audit_hardening.conf"
+        backup: true
+        validate: "/usr/sbin/{{ ssh_daemon }} -T -f %s"
+      become: true
+  
+  when: first5ssh_hardenssh | bool
+  notify: First5 SSH | restart ssh
 
 - name: SSH Config | add sshd (daemon) config file
   template:

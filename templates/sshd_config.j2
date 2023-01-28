@@ -1,6 +1,10 @@
 # {{ ansible_managed | comment }}
 # See the sshd_config(5) manpage for details
 
+{% if first5ssh_hardenssh %}
+Include /etc/ssh/sshd_config.d/*.conf 
+{% endif %}
+
 # What ports, IPs and protocols we listen for
 Port {{ ssh_port }}
 # Use these options to restrict which interfaces/protocols sshd will bind to
@@ -81,6 +85,8 @@ MaxSessions {{ ssh_max_sessions }}
 
 MaxStartups {{ ssh_max_startups }}
 #Banner /etc/issue.net
+
+DebianBanner {{ ssh_show_debianbanner }}
 
 Compression {{ ssh_compression }}
 
