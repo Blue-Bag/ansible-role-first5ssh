@@ -1,0 +1,7 @@
+
+# Restrict key exchange, cipher, and MAC algorithms, as per sshaudit.com
+# hardening guide.
+KexAlgorithms {{ ssh_kexalgorithms|join(",") }}
+Ciphers {{ ssh_cyphers|join(",") }}
+MACs {{ ssh_macs|join(",") }}
+HostKeyAlgorithms {{ ssh_hostkeyalgorithms|join(",") }}
