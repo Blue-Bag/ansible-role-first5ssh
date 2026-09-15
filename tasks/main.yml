@@ -1,7 +1,7 @@
 ---
 
 - name: Include OS-specific variables.
-  include_vars: "{{ ansible_os_family }}.yml"
+  include_vars: "{{ ansible_facts['os_family'] }}.yml"
 
 - name: Include distribution and version-specific vars.
   include_vars: "{{ item }}"
@@ -105,3 +105,18 @@
   become: true
   notify: First5 SSH | restart ssh
   when: first5ssh_manageconfig | bool
+
+
+# for Trixie add a list of ips exempt from penalities
+- name: SSH | Exempt monitoring hosts from PerSourcePenalties
+  ansible.builtin.copy:
+    dest: /etc/ssh/sshd_config.d/10-penalty-exempt.conf
+    owner: root
+    group: root
+    mode: "0644"
+    content: |
+      # Managed by Ansible - do not edit by hand
+      # Hosts exempt from OpenSSH PerSourcePenalties (monitoring, LB checks)
+      PerSourcePenaltyExemptList {{ sshd_penalty_exempt_ips | join(',') }}
+    validate: "/usr/sbin/sshd -t -f %s"
+  notify: Reload ssh
