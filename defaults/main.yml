@@ -81,3 +81,6 @@ ssh_compression: 'delayed'
 ssh_bastion: false
 ssh_allowfwdgroups: "{{ ssh_allowgroups }}"
 ssh_allowtunneling_destinations: []
+
+sshd_penalty_exempt_ips:
+  - 127.0.0.1/32     # self
