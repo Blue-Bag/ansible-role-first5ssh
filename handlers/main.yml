@@ -6,7 +6,7 @@
     state: restarted
 
 # handlers/main.yml
-- name: First5 SSH| Reload ssh
+- name: First5 SSH | Reload ssh
   ansible.builtin.service:
     name: "{{ ssh_service }}"
     state: reloaded

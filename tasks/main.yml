@@ -119,4 +119,4 @@
       # Hosts exempt from OpenSSH PerSourcePenalties (monitoring, LB checks)
       PerSourcePenaltyExemptList {{ sshd_penalty_exempt_ips | join(',') }}
     validate: "/usr/sbin/sshd -t -f %s"
-  notify: Reload ssh
+  notify: First5 SSH | Reload ssh
