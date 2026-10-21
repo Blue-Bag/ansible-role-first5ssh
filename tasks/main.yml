@@ -7,7 +7,7 @@
   include_vars: "{{ item }}"
   with_first_found:
     - files:
-        - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+        - "{{ ansible_facts['distribution'] }}-{{ ansible_facts['distribution_major_version'] }}.yml"
       skip: true
 
 
@@ -58,7 +58,7 @@
         size: 4096
         type: rsa
         force: True
-      when: ((ansible_date_time.epoch|int - stat_rsa_results.stat.mtime) > (sshkey_regen_days * 60 * 60 * 24))
+      when: ((ansible_facts['date_time']['epoch']|int - stat_rsa_results.stat.mtime) > (sshkey_regen_days * 60 * 60 * 24))
   
 
     - name: Regenerate host ed25519 keys
@@ -67,7 +67,7 @@
         size: 4096
         type: ed25519
         force: True
-      when: ((ansible_date_time.epoch|int - stat_ed25519_results.stat.mtime) > (sshkey_regen_days * 60 * 60 * 24))
+      when: ((ansible_facts['date_time']['epoch']|int - stat_ed25519_results.stat.mtime) > (sshkey_regen_days * 60 * 60 * 24))
 
 
     - name: Disable SSH short moduli for DH
@@ -120,3 +120,4 @@
       PerSourcePenaltyExemptList {{ sshd_penalty_exempt_ips | join(',') }}
     validate: "/usr/sbin/sshd -t -f %s"
   notify: First5 SSH | Reload ssh
+  when: ansible_facts['distribution_major_version'] | int >= 13

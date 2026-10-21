@@ -82,5 +82,6 @@ ssh_bastion: false
 ssh_allowfwdgroups: "{{ ssh_allowgroups }}"
 ssh_allowtunneling_destinations: []
 
-sshd_penalty_exempt_ips:
-  - 127.0.0.1/32     # self
+# self, our servers (group_ips), the firewall allowlist (office, VPNs) and any extras
+sshd_penalty_exempt_extra: []
+sshd_penalty_exempt_ips: "{{ (['127.0.0.1/32'] + (group_ips | default([])) + (fw_acl_a_ip | default([]) | map(attribute='ip') | list) + sshd_penalty_exempt_extra) | unique }}"
