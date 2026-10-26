@@ -63,7 +63,7 @@ first5ssh_manageconfig: true
 first5ssh_hardenssh: true
 
 # only regen keys every n days
-sshkey_regen_days: 10
+sshkey_regen_days: 365
 
 
 ssh_show_debianbanner: 'no'
