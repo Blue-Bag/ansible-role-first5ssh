@@ -57,7 +57,7 @@
         path: /etc/ssh/ssh_host_rsa_key
         size: 4096
         type: rsa
-        force: True
+        force: false
       when: ((ansible_facts['date_time']['epoch']|int - stat_rsa_results.stat.mtime) > (sshkey_regen_days * 60 * 60 * 24))
   
 
@@ -66,7 +66,7 @@
         path: /etc/ssh/ssh_host_ed25519_key
         size: 4096
         type: ed25519
-        force: True
+        force: false
       when: ((ansible_facts['date_time']['epoch']|int - stat_ed25519_results.stat.mtime) > (sshkey_regen_days * 60 * 60 * 24))
 
 
